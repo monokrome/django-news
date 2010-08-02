@@ -1,0 +1,10 @@
+django news
+author: Brandon R. Stoner <monokrome@monokro.me>
+
+A django application for posting news. This works as a fairly
+decent news or blogging application, and easily provides features
+like RSS and ATOM feeds at no cost.
+
+Future plans:
+- Added support for markup and other formatting.
+
