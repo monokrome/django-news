@@ -1,0 +1,40 @@
+{% extends "news/base.html" %}
+
+{% block content %}
+      <ul class="articles">
+      {% for article in article_list %}
+        <li class="article">
+          <h3><a href="{% url news_article article.id %}">
+            {{ article.title }}
+          </a></h3>
+          <div class="summary">
+            {% if article.summary != "" %}
+              {{ article.summary|safe }}
+            {% else %}
+              {{ article.body|safe }}
+            {% endif %}
+          </div>
+          <h6>
+          {% if article.body != article.summary %}{% if article.summary != "" %}
+            <p class="right"><a href="{% url news_article article.id %}">Read more...</a></p>
+          {% endif %}{% endif %}
+            Posted on {{article.created_on.date}} at {{article.created_on.time}}
+            (<a href="{% url news_article article.slug %}">permalink</a>)
+          </h6>
+        </li>
+      {% endfor %}
+		{% if is_paginated %}
+			<div class="pagination">
+				{% if page_obj.has_previous %}
+				<p class="left"><a href="{% url news_index page_obj.previous_page_number %}">&lt;&lt; previous page</a></p>
+				{% endif %}
+
+				{% if page_obj.has_next %}
+				<p class="right"><a href="{% url news_index page_obj.next_page_number %}">next page &gt;&gt;</a></p>
+				{% endif %}
+
+				<p>page {{ page_obj.number }} of {{ paginator.num_pages }}<p>
+			</div>
+		{% endif %}
+      </ul>
+{% endblock content %}

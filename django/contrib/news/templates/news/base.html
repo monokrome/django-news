@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block headers %}
+	{{ block.super }}
+
+	<link rel="alternate"
+	      type="application/rss+xml"
+	      href="{% url news_feed_rss2 "latest" %}"
+	      title="Oxygen News">
+{% endblock headers %}
+
