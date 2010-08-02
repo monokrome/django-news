@@ -1,9 +1,11 @@
 from django.contrib import admin
-from boundless.django.news.models import Article
-from attachments.admin import AttachmentInlines
+from models import Article
+
+# Add this back when we make attachments support optional
+# from attachments.admin import AttachmentInlines
 
 class ArticleAdmin(admin.ModelAdmin):
-    inlines = [AttachmentInlines]
+#    inlines = [AttachmentInlines]
     list_display = ('title','published','created_on','slug')
 
     fieldsets = (

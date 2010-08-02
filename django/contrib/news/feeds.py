@@ -1,8 +1,8 @@
-from boundless.django.news.models import Article
 from django.utils.feedgenerator import Atom1Feed, Rss201rev2Feed, \
     RssUserland091Feed
 from django.contrib.syndication.feeds import Feed, FeedDoesNotExist,\
     ObjectDoesNotExist
+from models import Article
 
 class LatestArticles(Feed):
     title = "http://monokro.me blog"

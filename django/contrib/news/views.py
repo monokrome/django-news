@@ -1,5 +1,5 @@
 from django.views.generic.list_detail import object_list,object_detail
-from boundless.django.news.models import Article
+from models import Article
 
 RESULTS_PER_LIST_PAGE=3
 
