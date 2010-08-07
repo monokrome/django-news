@@ -3,6 +3,7 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from datetime import datetime
 import re
+import availability
 
 SUMMARY_MAX_LENGTH = 768
 
@@ -21,6 +22,7 @@ class Article(models.Model):
     title = models.CharField(max_length=64)
     body = models.TextField()
     summary = models.TextField(blank=True)
+    markup_filter = models.CharField(max_length=32, choices=availability.markup_filters)
     slug = models.SlugField(blank=True, unique=True)
     published = models.BooleanField(default=False)
     created_on = models.DateTimeField()

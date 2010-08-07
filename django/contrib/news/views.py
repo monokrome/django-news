@@ -2,13 +2,11 @@ from django.views.generic.list_detail import object_list,object_detail
 from models import Article
 import availability
 
-RESULTS_PER_LIST_PAGE=3
-
-def index(request, page=1):
+def index(request, page=1, max_count=3):
     qs = Article.objects.filter(published=True).order_by('-created_on')
 
     return object_list(request, queryset=qs, template_object_name='article',\
-        paginate_by=RESULTS_PER_LIST_PAGE, page=page, extra_context={
+        paginate_by=max_count, page=page, extra_context={
             'comments_available': availability.comments
         })
 
