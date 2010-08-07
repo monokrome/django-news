@@ -6,12 +6,12 @@ from models import Article
 
 class ArticleAdmin(admin.ModelAdmin):
 #    inlines = [AttachmentInlines]
-    list_display = ('title','published','created_on','slug')
+    list_display = ('title','published','created_on','markup_filter','slug')
 
     fieldsets = (
         ('Article Information', {'fields': ('title','body','published')}),
         ('Advanced', {
-            'fields': ['author','slug','created_on','summary',],
+            'fields': ['markup_filter', 'author','slug','created_on','summary',],
             'classes': ['collapse',],
         }),
     )

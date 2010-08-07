@@ -7,6 +7,11 @@ import availability
 
 SUMMARY_MAX_LENGTH = 768
 
+MARKUP_FILTER_CHOICES = []
+
+for index in range(len(availability.markup_filters)):
+    MARKUP_FILTER_CHOICES.append( (index,availability.markup_filters[index]) )
+
 class Category(models.Model):
     parent = models.ForeignKey('self', blank=True, null=True)
     name = models.CharField(max_length=32, unique=True)
@@ -22,12 +27,28 @@ class Article(models.Model):
     title = models.CharField(max_length=64)
     body = models.TextField()
     summary = models.TextField(blank=True)
-    markup_filter = models.CharField(max_length=32, choices=availability.markup_filters)
+    markup_filter = models.PositiveIntegerField(max_length=32, choices=MARKUP_FILTER_CHOICES, null=True, blank=True)
     slug = models.SlugField(blank=True, unique=True)
     published = models.BooleanField(default=False)
     created_on = models.DateTimeField()
     author = models.ForeignKey(User,null=True,blank=True)
     category = models.ManyToManyField(Category,related_name='articles',null=True,blank=True)
+
+    def formatted_summary(self):
+        return self.formatted_body(summary=True)
+
+    def formatted_body(self, summary=False):
+        from django.contrib.markup.templatetags import markup
+
+        if summary:
+            body = self.summary
+        else:
+            body = self.body
+
+        if self.markup_filter is not None and hasattr(markup, MARKUP_FILTER_CHOICES[self.markup_filter][1]):
+            return getattr(markup, MARKUP_FILTER_CHOICES[self.markup_filter][1])(body)
+        else:
+            return body
 
     @models.permalink
     def get_absolute_url(self):
