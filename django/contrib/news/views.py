@@ -1,5 +1,6 @@
 from django.views.generic.list_detail import object_list,object_detail
 from models import Article
+import availability
 
 RESULTS_PER_LIST_PAGE=3
 
@@ -7,7 +8,9 @@ def index(request, page=1):
     qs = Article.objects.filter(published=True).order_by('-created_on')
 
     return object_list(request, queryset=qs, template_object_name='article',\
-        paginate_by=RESULTS_PER_LIST_PAGE, page=page)
+        paginate_by=RESULTS_PER_LIST_PAGE, page=page, extra_context={
+            'comments_available': availability.comments
+        })
 
 def article(request, identifier, slugified=False):
     data = {
@@ -19,5 +22,10 @@ def article(request, identifier, slugified=False):
     else:
         data['slug'] = identifier
 
-    return object_detail(request, template_object_name='article', **data)
+    data['template_object_name'] = 'article'
+    data['extra_context'] = {
+        'comments_available': availability.comments
+    }
+
+    return object_detail(request, **data)
 
