@@ -6,11 +6,14 @@
 			<h3><a href="{% url news_article article.id %}">
 				{{ article.title }}
 			</a></h3>
-			<div class="body">{{article.body|safe}}</div>
-				<h6>
-					Posted on {{article.created_on.date}} at {{article.created_on.time}}
-					(<a href="{% url news_article article.slug %}">permalink</a>)
-				</h6>
+			<div class="body">
+				{{ article.formatted_body|safe }}
+			</div>
+
+			<h6>
+				Posted on {{article.created_on.date}} at {{article.created_on.time}}
+				(<a href="{% url news_article article.slug %}">permalink</a>)
+			</h6>
 			</li>
 		</ul>
 
@@ -19,3 +22,4 @@
 			{% include "news/article_comment_form.html" %}
 		{% endif %}
 {% endblock content %}
+

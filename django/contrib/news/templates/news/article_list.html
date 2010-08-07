@@ -9,9 +9,9 @@
           </a></h3>
           <div class="summary">
             {% if article.summary != "" %}
-              {{ article.summary|safe }}
+              {{ article.formatted_summary|safe }}
             {% else %}
-              {{ article.body|safe }}
+              {{ article.formatted_body|safe }}
             {% endif %}
           </div>
           <h6>
