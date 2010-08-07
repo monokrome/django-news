@@ -4,8 +4,8 @@
 <form action="{% comment_form_target %}" method="POST">
 	<ul class="form-fields">
 		{{ article_comment_form.as_ul }}
-		<li class="form-field"><input type="hidden" name="next" value="{% url news_article article.pk %}/"></li>
 
+		<li class="form-field"><input type="hidden" name="next" value="{% url news_article article.pk %}/"></li>
 		<li class="form-field"><input type="submit" value="Post Comment" /></li>
 	</ul>
 </form>
