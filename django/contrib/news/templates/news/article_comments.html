@@ -1,0 +1,8 @@
+{% load comments %}
+{% get_comment_count for article as article_comment_count %}
+{% get_comment_list for article as article_comments %}
+
+{% for comment in article_comments %}
+	{{ comment }}
+{% endfor %}
+
