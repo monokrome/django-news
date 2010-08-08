@@ -1,13 +1,45 @@
 {% load comments %}
 {% get_comment_form for article as article_comment_form %}
 
+<div id="comment-form">
 <form action="{% comment_form_target %}" method="POST">
 	{% csrf_token %}
-	<input type="hidden" name="next" value="{% url news_article article.pk %}/">
+	<fieldset>
+		<legend>
+			Comment on this
+		</legend>
 
-	<ul class="form-fields">
-		{{ article_comment_form.as_ul }}
-		<li class="form-field"><input type="submit" value="Post Comment" /></li>
-	</ul>
+		<input type="hidden" name="next" value="{% url news_article article.pk %}/">
+		{{ article_comment_form.honeypot }}
+		{{ article_comment_form.object_pk }}
+		{{ article_comment_form.content_type }}
+		{{ article_comment_form.timestamp }}
+		{{ article_comment_form.security_hash }}
+
+		<ul class="form-fields">
+			<li class="form-field odd">
+				<label for="id_name">name</label>
+				{{ article_comment_form.name }}
+			</li>	
+			<li class="form-field even">
+				<label for="id_url">website</label>
+				{{ article_comment_form.url }}
+			</li>	
+			<li class="form-field odd %}">
+				<label for="id_email">email</label>
+				{{ article_comment_form.email }}
+			</li>
+			<li class="form-field even %}">
+				<label for="id_comment">
+					your comments
+</label>
+				{{ article_comment_form.comment }}
+			</li>
+			<li class="form-field odd">
+				<input type="submit" value="Post comment" />
+			</li>
+		</ul>
+	</fieldset>
 </form>
+</div>
 

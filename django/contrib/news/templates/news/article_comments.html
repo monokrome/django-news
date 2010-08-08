@@ -2,7 +2,19 @@
 {% get_comment_count for article as article_comment_count %}
 {% get_comment_list for article as article_comments %}
 
+{% ifnotequal article_comment_count 0 %}
+<ul class="comments">
 {% for comment in article_comments %}
-	{{ comment }}
+	<li class="comment {% cycle "odd" "even" %}">
+		<div class="name">
+			<a href="mailto:{{ comment.email }}">
+				{{ comment.name }}
+			</a>
+		</div>
+		<div class="email">{{ comment.email }}</div>
+		<div class="body">{{ comment.comment }}</div>
+	</li>
 {% endfor %}
+</ul>
+{% endifnotequal %}
 
