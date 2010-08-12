@@ -1,7 +1,9 @@
 from django.views.generic.list_detail import object_list,object_detail
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
+from django.http import HttpResponseRedirect
 from django.template import RequestContext
+from django.core.urlresolvers import reverse
 from forms import NewsArticleForm
 from models import Article
 import availability
@@ -32,7 +34,7 @@ def article(request, identifier, slugified=False):
     return object_detail(request, **data)
 
 @login_required
-def edit_article(request, article_id=None):
+def edit_article(request, article_id=None, posted=False):
     editing = False
 
     if request.method == 'POST':
@@ -44,6 +46,8 @@ def edit_article(request, article_id=None):
         if form.is_valid():
             form.instance.author = request.user
             form.save()
+
+        return HttpResponseRedirect(reverse('news_index'))
 
     else:
         if article_id is None:
