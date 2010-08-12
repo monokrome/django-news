@@ -10,11 +10,12 @@ if hasattr(settings, 'INSTALLED_APPS') and 'django.contrib.comments' in settings
 else:
     comments = False
 
+markup_filters = []
+
 ###
 # Check if markup is available
 if hasattr(settings, 'INSTALLED_APPS') and 'django.contrib.markup' in settings.INSTALLED_APPS:
     markup = True
-    markup_filters = []
 
     # Check for support methods
     try:
@@ -36,5 +37,4 @@ if hasattr(settings, 'INSTALLED_APPS') and 'django.contrib.markup' in settings.I
         pass
 else:
     markup = False
-    markup_filters = []
 
