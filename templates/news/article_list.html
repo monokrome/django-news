@@ -18,7 +18,7 @@
           {% if article.body != article.summary %}{% if article.summary != "" %}
             <p class="right"><a href="{% url news_article article.id %}">Read more...</a></p>
           {% endif %}{% endif %}
-            Posted on {{article.created_on.date}} at {{article.created_on.time}}
+            Posted {% if article.author %} by {{ article.author }} {% endif %} on {{article.created_on.date}} at {{article.created_on.time}}
             (<a href="{% url news_article article.slug %}">permalink</a>)
           </h6>
         </li>

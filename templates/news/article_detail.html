@@ -11,7 +11,7 @@
 			</div>
 
 			<h6>
-				Posted on {{article.created_on.date}} at {{article.created_on.time}}
+				Posted {% if article.author %} by {{ article.author }} {% endif %} on {{article.created_on.date}} at {{article.created_on.time}}
 				(<a href="{% url news_article article.slug %}">permalink</a>)
 			</h6>
 			</li>
