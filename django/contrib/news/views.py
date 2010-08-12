@@ -1,4 +1,8 @@
 from django.views.generic.list_detail import object_list,object_detail
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template import RequestContext
+from forms import NewsArticleForm
 from models import Article
 import availability
 
@@ -26,4 +30,29 @@ def article(request, identifier, slugified=False):
     }
 
     return object_detail(request, **data)
+
+@login_required
+def edit_article(request, article_id=None):
+    editing = False
+
+    if request.method == 'POST':
+        if article_id is not None:
+            editing = True
+
+        form = NewsArticleForm(request.POST)
+
+        if form.is_valid():
+            form.instance.author = request.user
+            form.save()
+
+    else:
+        if article_id is None:
+            form = NewsArticleForm()
+        else:
+            article = get_object_or_404(Article, pk=article_id)
+            form = NewsArticleForm(instance=article)
+            editing = True
+
+    return render_to_response('news/article_edit.html', {'form': form}, \
+        context_instance=RequestContext(request))
 

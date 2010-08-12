@@ -30,7 +30,7 @@ class Article(models.Model):
     markup_filter = models.PositiveIntegerField(max_length=32, choices=MARKUP_FILTER_CHOICES, null=True, blank=True)
     slug = models.SlugField(blank=True, unique=True)
     published = models.BooleanField(default=False)
-    created_on = models.DateTimeField()
+    created_on = models.DateTimeField(blank=True)
     author = models.ForeignKey(User,null=True,blank=True)
     category = models.ManyToManyField(Category,related_name='articles',null=True,blank=True)
 
@@ -61,7 +61,7 @@ class Article(models.Model):
             else:
                 self.summary = self.body
 
-        if not self.created_on:
+        if self.created_on is None:
             self.created_on = datetime.now()
 
         self.slug = slugify(self.title)

@@ -1,0 +1,53 @@
+{% extends "news/base.html" %}
+
+{% block content %}
+	<div id="article-editor">
+		{{ form.errors }}
+
+		<form action="{% url news_article_edit %}" method="POST">
+			{% csrf_token %}
+
+			<fieldset>
+				<legend>Post an article</legend>
+				<ul class="form-fields">
+					<li class="form-field odd">
+						<label for="id_title">title</label>
+						{{ form.title }}
+					</li>
+					<li class="form-field even">
+						<label for="id_body">contents</label>
+						{{ form.body }}
+					</li>
+<!--
+					<li class="form-field odd">
+						<label for="id_summary"></label>
+						{{ form.summary }}
+					</li>
+-->
+					<li class="form-field even">
+						<label for="id_markup_filter">Markup?</label>
+						{{ form.markup_filter }}
+					</li>
+<!--
+					<li class="form-field odd">
+						<label for="id_slug">slug</label>
+						{{ form.slug }}
+					</li>
+					<li class="form-field even">
+						<label for="id_category">category</label>
+						{{ form.category }}
+					</li>
+-->
+					<li>
+						<label for="id_published">publish this article </label>
+						{{ form.published }}
+					</li>
+					<li class="form-field odd">
+						<input type="submit" value="{% if editing %}Edit{% else %}Post{% endif %} Article">
+					</li>
+				</ul>
+			</fieldset>
+		</form>
+	</div>
+{% endblock content %}
+
