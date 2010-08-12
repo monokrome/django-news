@@ -1,5 +1,5 @@
 # django news
-##### author: Brandon R. Stoner, (monokrome@monokro.me)[mailto:monokrome@monokro.me]
+##### author: Brandon R. Stoner, [monokrome@monokro.me](mailto:monokrome@monokro.me)
 
 A django application for posting news. This works as a fairly
 decent *news or blogging* application, and easily provides features
