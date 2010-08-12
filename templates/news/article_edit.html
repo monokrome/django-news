@@ -4,7 +4,11 @@
 	<div id="article-editor">
 		{{ form.errors }}
 
+      {% if editing %}
+		<form action="{% url news_article_edit article.pk %}" method="POST">
+      {% else %}
 		<form action="{% url news_article_edit %}" method="POST">
+      {% endif %}
 			{% csrf_token %}
 
 			<fieldset>

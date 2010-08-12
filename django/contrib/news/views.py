@@ -40,7 +40,6 @@ def edit_article(request, article_id=None, posted=False):
     else:
         article = get_object_or_404(Article, pk=article_id)
 
-
     if article is not None:
         if request.user.has_perm('news.change_article') is False:
             raise Http404('You are not allowed to edit other user''s news articles.')
@@ -51,10 +50,11 @@ def edit_article(request, article_id=None, posted=False):
     editing = False
 
     if request.method == 'POST':
-        if article_id is not None:
+        if article is not None:
+            form = NewsArticleForm(request.POST, instance=article)
             editing = True
-
-        form = NewsArticleForm(request.POST)
+        else:
+            form = NewsArticleForm(request.POST)
 
         if form.is_valid():
             form.instance.author = request.user
@@ -69,6 +69,6 @@ def edit_article(request, article_id=None, posted=False):
             form = NewsArticleForm(instance=article)
             editing = True
 
-    return render_to_response('news/article_edit.html', {'form': form}, \
+    return render_to_response('news/article_edit.html', {'form': form, 'editing': editing, 'article': article}, \
         context_instance=RequestContext(request))
 
