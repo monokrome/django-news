@@ -7,11 +7,10 @@
 {% for comment in article_comments %}
 	<li class="comment {% cycle "odd" "even" %}">
 		<div class="name">
-			<a href="mailto:{{ comment.email }}">
+			{% if comment.url %}<a href="{{ comment.url }}">{% endif %}
 				{{ comment.name }}
-			</a>
+			{% if comment.url %}</a>{% endif %}
 		</div>
-		<div class="email">{{ comment.email }}</div>
 		<div class="body">{{ comment.comment }}</div>
 	</li>
 {% endfor %}

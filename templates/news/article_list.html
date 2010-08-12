@@ -23,8 +23,11 @@
               <a href="{% url news_article article.slug %}">permalink</a>
               {% if user.is_authenticated %}
                 {% if perms.news.change_article or user.is_superuser or user == article.author %}
-                  -
-                  <a href="{% url news_article_edit article.pk %}">edit</a>
+                  - <a href="{% url news_article_edit article.pk %}">edit</a>
+                {% endif %}
+
+                {% if perms.news.delete_article or user.is_superuser or user == article.author %}
+                  - <a href="{% url news_article_delete article.pk %}">delete</a>
                 {% endif %}
               {% endif %}
             )

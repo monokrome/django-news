@@ -72,3 +72,14 @@ def edit_article(request, article_id=None, posted=False):
     return render_to_response('news/article_edit.html', {'form': form, 'editing': editing, 'article': article}, \
         context_instance=RequestContext(request))
 
+@login_required
+def delete_article(request, article_id):
+    article = get_object_or_404(Article, pk=article_id)
+
+    if request.user.has_perm('news.delete_article') or \
+       request.user.is_superuser or \
+       request.user is article.author:
+        article.delete()
+
+    return HttpResponseRedirect(reverse('news_index'))
+
