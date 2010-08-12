@@ -1,7 +1,7 @@
 from django.views.generic.list_detail import object_list,object_detail
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from forms import NewsArticleForm
@@ -35,6 +35,19 @@ def article(request, identifier, slugified=False):
 
 @login_required
 def edit_article(request, article_id=None, posted=False):
+    if article_id is None:
+        article = None
+    else:
+        article = get_object_or_404(Article, pk=article_id)
+
+
+    if article is not None:
+        if request.user.has_perm('news.change_article') is False:
+            raise Http404('You are not allowed to edit other user''s news articles.')
+    else:
+        if request.user.has_perm('news.add_article') is False:
+            raise Http404('You are not allowed to post news articles.')
+
     editing = False
 
     if request.method == 'POST':
@@ -53,7 +66,6 @@ def edit_article(request, article_id=None, posted=False):
         if article_id is None:
             form = NewsArticleForm()
         else:
-            article = get_object_or_404(Article, pk=article_id)
             form = NewsArticleForm(instance=article)
             editing = True
 
