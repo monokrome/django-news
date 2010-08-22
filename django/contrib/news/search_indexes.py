@@ -9,7 +9,7 @@ class ArticleIndex(SearchIndex):
     summary = CharField(model_attr='summary')
     slug = CharField(model_attr='slug')
     author = CharField(model_attr='author')
-    categories = models.CharField(model_attr='category')
+    categories = CharField(model_attr='category')
 
     def get_queryset(self):
         return Article.objects.all()
