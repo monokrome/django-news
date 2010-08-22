@@ -8,15 +8,15 @@ setup(name='django-news',
       url='http://monokro.me/',
       download_url='http://github.com/monokrome/django-news/',
       packages=['django.contrib.news'],
-      data_files=[
-             (
-                 'django/contrib/news/templates/news/',
-                 [
-                     'django/contrib/news/templates/news/base.html',
-                     'django/contrib/news/templates/news/article_list.html',
-                     'django/contrib/news/templates/news/article_detail.html',
-                 ]
-             ),
-      ],
+#      data_files=[
+#             (
+#                 'django/contrib/news/templates/news/',
+#                 [
+#                     'django/contrib/news/templates/news/base.html',
+#                     'django/contrib/news/templates/news/article_list.html',
+#                     'django/contrib/news/templates/news/article_detail.html',
+#                 ]
+#             ),
+#      ],
 )
 
