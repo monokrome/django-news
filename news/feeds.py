@@ -5,13 +5,12 @@ from django.contrib.syndication.feeds import Feed, FeedDoesNotExist,\
 from models import Article
 
 class LatestArticles(Feed):
-    title = "http://monokro.me blog"
-    author_link = 'http://monokro.me/'
-    copyright = 'Copyright(C) 2010, Brandon "monokrome" Stoner'
-    author_name = 'Brandon "monokrome" Stoner'
-    author_email = 'monokrome@monokro.me'
-    description = "Quite possibly the best blog in the world, assuming you "\
-        "don't count any of the better ones."
+    title = ""
+    author_link = ''
+    copyright = ''
+    author_name = ''
+    author_email = ''
+    description = ''
     ttl = '1'
 
     title_template = 'feeds/news/article_title.html'
