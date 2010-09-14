@@ -9,5 +9,15 @@ setup(name='django-news',
       author='Brandon R. Stoner',
       author_email='monokrome@monokro.me',
       url='http://github.com/monokrome/django-news/',
+      classifiers = [
+          "Development Status :: 4 - Beta",
+          "Environment :: Web Environment",
+          "Intended Audience :: Developers",
+          "Operating System :: OS Independant",
+          "Programming Language :: Python",
+          "Framework :: Django",
+          "Topic :: Internet :: WWW/HTTP / :: Dynamic Content",
+          "Topic :: Internet :: WWW/HTTP / :: Site Management",
+      ],
 )
 
