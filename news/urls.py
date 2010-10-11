@@ -15,12 +15,12 @@ atom_v1_feeds = {
 }
 
 urlpatterns = patterns('',
-    url(r'^article/edit/$', 'django.contrib.news.views.edit_article', name='news_article_edit'),
-    url(r'^article/edit/(?P<article_id>[\d]+)/$', 'django.contrib.news.views.edit_article', name='news_article_edit'),
-    url(r'^article/delete/(?P<article_id>[\d]+)/$', 'django.contrib.news.views.delete_article', name='news_article_delete'),
-    url(r'^(?P<page>[\d]+)/$', 'django.contrib.news.views.index', name='news_index'),
-    url(r'^article/(?P<identifier>[\d]+)/$','django.contrib.news.views.article', name='news_article'),
-    url(r'^article/(?P<identifier>[^/]+)/$','django.contrib.news.views.article', {'slugified':True}, name='news_article'),
+    url(r'^article/edit/$', 'news.views.edit_article', name='news_article_edit'),
+    url(r'^article/edit/(?P<article_id>[\d]+)/$', 'news.views.edit_article', name='news_article_edit'),
+    url(r'^article/delete/(?P<article_id>[\d]+)/$', 'news.views.delete_article', name='news_article_delete'),
+    url(r'^(?P<page>[\d]+)/$', 'news.views.index', name='news_index'),
+    url(r'^article/(?P<identifier>[\d]+)/$','news.views.article', name='news_article'),
+    url(r'^article/(?P<identifier>[^/]+)/$','news.views.article', {'slugified':True}, name='news_article'),
 
     url(r'^rss/v1/(?P<url>.+)$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_v1_feeds}, name='news_feed_rss'),
     url(r'^rss/v2/(?P<url>.+)$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_v2_feeds}, name='news_feed_rss2'),
