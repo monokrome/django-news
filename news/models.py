@@ -45,7 +45,10 @@ class Article(models.Model):
         else:
             body = self.body
 
-        if self.markup_filter is not None and hasattr(markup, MARKUP_FILTER_CHOICES[self.markup_filter][1]):
+        if self.markup_filter is not None \
+            and self.markup_filter in MARKUP_FILTER_CHOICES \
+            and hasattr(markup, MARKUP_FILTER_CHOICES[self.markup_filter][1]):
+
             return getattr(markup, MARKUP_FILTER_CHOICES[self.markup_filter][1])(body)
         else:
             return body
