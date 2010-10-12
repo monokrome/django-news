@@ -46,8 +46,7 @@ class Article(models.Model):
             body = self.body
 
         if self.markup_filter is not None \
-            and self.markup_filter in MARKUP_FILTER_CHOICES \
-            and hasattr(markup, MARKUP_FILTER_CHOICES[self.markup_filter][1]):
+            and self.get_markup_filter_display() in availability.markup_filters:
 
             return getattr(markup, MARKUP_FILTER_CHOICES[self.markup_filter][1])(body)
         else:
