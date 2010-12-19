@@ -2,6 +2,7 @@
 ### TODO: Find/create a more centralized, simple, standard method of doing this.
 from exceptions import ImportError
 from django.conf import settings
+from django.utils import datastructures
 
 ###
 # Check if comments are available
@@ -10,7 +11,7 @@ if hasattr(settings, 'INSTALLED_APPS') and 'django.contrib.comments' in settings
 else:
     comments = False
 
-markup_filters = {}
+markup_filters = datastructures.SortedDict()
 
 ###
 # Check if markup is available
