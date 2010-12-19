@@ -10,31 +10,34 @@ if hasattr(settings, 'INSTALLED_APPS') and 'django.contrib.comments' in settings
 else:
     comments = False
 
-markup_filters = []
+markup_filters = {}
 
 ###
 # Check if markup is available
 if hasattr(settings, 'INSTALLED_APPS') and 'django.contrib.markup' in settings.INSTALLED_APPS:
     markup = True
-
-    # Check for support methods
-    try:
-        import textile
-        markup_filters.append('textile')
-    except ImportError:
-        pass
-
-    try:
-        import markdown
-        markup_filters.append('markdown')
-    except ImportError:
-        pass
-
-    try:
-        import docutils
-        markup_filters.append('restructuredtext')
-    except ImportError:
-        pass
 else:
     markup = False
+
+# Check for supported markup methods
+try:
+    import textile
+
+    markup_filters['textile'] = True
+except ImportError:
+    markup_filters['textile'] = False
+
+try:
+    import markdown
+
+    markup_filters['markdown'] = True
+except ImportError:
+    markup_filters['markdown'] = False
+
+try:
+    import docutils
+
+    markup_filters['restructuredtext'] = True
+except ImportError:
+    markup_filters['restructuredtext'] = False
 

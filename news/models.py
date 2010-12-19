@@ -9,8 +9,15 @@ SUMMARY_MAX_LENGTH = 768
 
 MARKUP_FILTER_CHOICES = []
 
-for index in range(len(availability.markup_filters)):
-    MARKUP_FILTER_CHOICES.append( (index,availability.markup_filters[index]) )
+print availability.markup_filters
+
+filters_iter = availability.markup_filters.iterkeys()
+
+for index in xrange(len(availability.markup_filters)):
+    current_filter = filters_iter.next()
+
+    if availability.markup_filters[current_filter] is True:
+        MARKUP_FILTER_CHOICES.append( (index,current_filter) )
 
 class Category(models.Model):
     parent = models.ForeignKey('self', blank=True, null=True)
@@ -49,10 +56,11 @@ class Article(models.Model):
         else:
             body = self.body
 
-        if self.markup_filter is not None \
-            and self.get_markup_filter_display() in availability.markup_filters:
+        if self.markup_filter is not None and self.get_markup_filter_display() in availability.markup_filters:
 
-            return getattr(markup, MARKUP_FILTER_CHOICES[self.markup_filter][1])(body)
+            markup_method = getattr(markup, self.get_markup_filter_display())
+
+            return markup_method(body)
         else:
             return body
 
