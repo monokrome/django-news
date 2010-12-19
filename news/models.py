@@ -9,10 +9,8 @@ SUMMARY_MAX_LENGTH = 768
 
 MARKUP_FILTER_CHOICES = []
 
-print availability.markup_filters
-
+# Loops through each filter in the dict of possible markup filters and maps them to choices.
 filters_iter = availability.markup_filters.iterkeys()
-
 for index in xrange(len(availability.markup_filters)):
     current_filter = filters_iter.next()
 
