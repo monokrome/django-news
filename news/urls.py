@@ -16,11 +16,11 @@ atom_v1_feeds = {
 
 urlpatterns = patterns('',
     url(r'^$', 'news.views.index', name='news_index'),
+    url(r'^(?P<page>[\d]+)/$', 'news.views.index', name='news_index'),
 
     url(r'^article/edit/$', 'news.views.edit_article', name='news_article_edit'),
     url(r'^article/edit/(?P<article_id>[\d]+)/$', 'news.views.edit_article', name='news_article_edit'),
     url(r'^article/delete/(?P<article_id>[\d]+)/$', 'news.views.delete_article', name='news_article_delete'),
-    url(r'^(?P<page>[\d]+)/$', 'news.views.index', name='news_index'),
     url(r'^article/(?P<identifier>[\d]+)/$','news.views.article', name='news_article'),
     url(r'^article/(?P<identifier>[^/]+)/$','news.views.article', {'slugified':True}, name='news_article'),
 
