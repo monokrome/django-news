@@ -24,6 +24,10 @@ class Category(models.Model):
 
 class Article(models.Model):
     """A single news entry."""
+
+    class Meta(object):
+        ordering = ('-created_on',)
+
     title = models.CharField(max_length=64)
     body = models.TextField()
     summary = models.TextField(blank=True)
