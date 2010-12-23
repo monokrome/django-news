@@ -1,0 +1,3 @@
+recursive-include news/templates *
+recursive-include news/static *
+recursive-include news/media *
